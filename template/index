@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <form action="/submit" method="post">
+        <input type="text" name="task" placeholder="Task">
+        <input type="email" name="email" placeholder="Email">
+        <select name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <button type="submit">Add To-Do Item</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Email</th>
+            <th>Priority</th>
+            <th>Actions</th>
+        </tr>
+        {% for index, todo in enumerate(todos) %}
+            <tr>
+                <td>{{ todo['task'] }}</td>
+                <td>{{ todo['email'] }}</td>
+                <td>{{ todo['priority'] }}</td>
+                <td>
+                    <form action="/delete/{{ index }}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <form action="/clear" method="post">
+        <button type="submit">Clear List</button>
+    </form>
+
+    <form action="/save" method="post">
+        <button type="submit">Save List</button>
+    </form>
+</body>
+</html>
